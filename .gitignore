@@ -1,5 +1,6 @@
 # vscode configs
 launch.json
+.DS_Store
 
 # ignore repos
 Old/
