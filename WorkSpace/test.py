@@ -1,60 +1,67 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import time
+import math
+
+start_time = time.time()
 
 envx = 192
 envy = 108
-zer = np.zeros((envx, envy), dtype=int)
-one = np.ones((envx, envy), dtype=int)
+zer = np.zeros((envx, envy), dtype=bool)
+one = np.ones((envx, envy), dtype=bool)
+x_size = 192
+a1_size = 18
+a2_size = 18
 
 robot = {}
 robot['armlength'] = int(envy / 4)
 robot['armwidth'] = int(envy / 40)
+
+space = np.zeros([x_size, a1_size, a2_size], dtype=float)
+env = zer
 
 
 def Presence(x, a1, a2):
     """ Calculate the presence of the robot at configuration config, 
         return an matrix of the same size of environment"""
     # calculate second joint position
-    pres = np.zeros((envx, envy), dtype=int)
-    l = robot['armlength']
-    w = robot['armwidth']
+    pres = np.zeros((envx, envy), dtype=bool)
+    l = int(robot['armlength'])
+    w = int(robot['armwidth'])
     x1 = x
     y1 = int(envy/2)
-    x2 = x1 + l * np.cos(a1)
-    y2 = y1 + l * np.sin(a1)
-    for x in range(envx):
-        for y in range(envy):
-            # check if in arm2
-            deltax = x - x2
-            deltay = y - y2
-            if deltax <= l and deltay <= l:
-                # four lines that define the arm2
-                dd1 = y - y2 - np.tan(a2) * (x - (x2 + w / (2 * np.sin(a2))))
-                dd2 = y - y2 - np.tan(a2) * (x - (x2 - w / (2 * np.sin(a2))))
-                dd3 = y - y2 - np.tan(a2 + np.pi / 2) * (x - x2)
-                dd4 = y - y2 - np.tan(a2 + np.pi / 2) * \
-                    (x - (x2 + l / np.cos(a2)))
-                if dd1 * dd2 <= 0 and dd3 * dd4 <= 0:
-                    pres[x, y] = 1
-                # check if in arm1
-                deltax = x - x1
-                deltay = y - y1
-                if deltax <= l and deltay <= l:
-                    # four lines that define the arm2
-                    dd1 = y - y1 - np.tan(a1) * \
-                        (x - (x1 + w / (2 * np.sin(a1))))
-                    dd2 = y - y1 - np.tan(a1) * \
-                        (x - (x1 - w / (2 * np.sin(a1))))
-                    dd3 = y - y1 - np.tan(a1 + np.pi / 2) * (x - x1)
-                    dd4 = y - y1 - np.tan(a1 + np.pi / 2) * \
-                        (x - (x1 + l / np.cos(a1)))
-                    if dd1 * dd2 <= 0 and dd3 * dd4 <= 0:
+    x2 = int(x1 + l * np.cos(a1))
+    y2 = int(y1 + l * np.sin(a1))
+    for x_ in range(l):
+        for y_ in range(l):
+            # check if in arm1
+            x = int(x1 + x_ * (- 1 + 2 * int(np.abs(a1) <= np.pi/2)))
+            y = int(y1 + y_ * (- 1 + 2 * int(a1 >= 0)))
+            if x >= 0 and y >= 0 and x < envx:
+                d = math.sqrt((x - x1) ** 2 + (y-y1) ** 2)
+                if d < l:
+                    A = np.tan(a1)
+                    dl = np.abs(A * x - y + y1 - x1 * A) / \
+                        np.sqrt(A ** 2 + 1)
+                    if dl < w:
                         pres[x, y] = 1
+            # check if in arm2
+            x = int(x2 + x_ * (- 1 + 2 * int(np.abs(a2) <= np.pi/2)))
+            y = int(y2 + y_ * (- 1 + 2 * int(a2 >= 0)))
+            if x >= 0 and y >= 0 and x < envx:
+                d = np.sqrt((x - x2) ** 2 + (y-y2) ** 2)
+                if d < l:
+                    A = np.tan(a2)
+                    dl = np.abs(A * x - y + y2 - x2 * A) / np.sqrt(A ** 2 + 1)
+                    if dl < w:
+                        pres[x, y] = 1
+                        continue
+
     return pres
 
 
-def drawSpace(env, pres=zer):
+def drawSpace(pres=zer):
     img = np.zeros((envy, envx, 3))
     for x in range(envx):
         for y in range(envy):
@@ -70,23 +77,27 @@ def drawSpace(env, pres=zer):
     plt.show()
 
 
-def Feasable(x, a1, a2, env):
+def Feasable(x, a1, a2):
     overlap = Presence(x, a1, a2) * env
     return (overlap.sum() > 0)
 
 
-def generateNeuronalSpace(env, x_size, a1_size, a2_size):
-    space = np.zeros([x_size, a1_size, a2_size])
+def generateNeuronalSpace():
     dx = 1. * envx / x_size
     da1 = np.pi * 2 / a1_size
     da2 = np.pi * 2 / a2_size
     for nx in range(x_size):
+        print(str(nx))
         for na1 in range(a1_size):
             for na2 in range(a2_size):
                 x = nx * dx
-                a1 = - np.pi + na1 * da1
-                a2 = - np.pi + na2 * da2
-                space[nx, na1, na2] = Feasable(x, a1, a2, env)
+                a1 = float(- np.pi + na1 * da1)
+                a2 = float(- np.pi + na2 * da2)
+                space[nx, na1, na2] = Feasable(x, a1, a2)
+
+
+def findPath():
+    print("Path found")
 
 
 # Build test environment (with obstacles)
@@ -99,12 +110,17 @@ for x in range(envx):
         else:
             env[x, y] = 1
 
-config = {
-    "a1": np.pi/4,
-    "a2": np.pi/2,
-    "x": int(envx / 2)
-}
+a1 = float(np.pi/3)
+a2 = float(np.pi/5)
+x = int(envx / 2)
 
-#drawSpace(env, Presence(config))
-generateNeuronalSpace(env, 192, 18, 18)
+drawSpace(Presence(x, a1, a2))
+preparation_time = time.time() - start_time
+print("Preparation took " + str(preparation_time) + " s.")
+generateNeuronalSpace()
+generation_time = time.time() - preparation_time
+print("Generation of neuronal space took " + str(generation_time) + " s.")
+findPath()
+finding_time = time.time() - generation_time - preparation_time
+print("Path finding took " + str(generation_time) + " s.")
 print("Done")
