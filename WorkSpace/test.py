@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import time
 import math
+from numba import jit, cuda
 
 start_time = time.time()
 
@@ -34,7 +35,7 @@ obstacle_aera = []
 feasible_aera = []
 target_aera = []
 
-
+@vectorize(["float32(float32, float32)"], target='cuda')
 def Presence(x, a1, a2):
     """ Calculate the presence of the robot at configuration config, 
         return an matrix of the same size of environment"""
@@ -93,25 +94,31 @@ def drawSpace(pres=zer):
     plt.show()
 
 
+@jit(target = "cuda")
 def Feasable(x, a1, a2):
     overlap = np.multiply(Presence(x, a1, a2), env)
     return (overlap.sum() <= 2)
 
 
+@jit(target = "cuda")
 def generateNeuronalSpace():
     for nx in range(x_size):
-        print(str(nx))
+        #print(str(nx))
         for na1 in range(a1_size):
             for na2 in range(a2_size):
                 x = nx * dx
                 a1 = float(- np.pi + na1 * da1)
                 a2 = float(- np.pi + na2 * da2)
                 if Feasable(x, a1, a2):
-                    feasible_aera.append([nx, na1, na2])
+                    feasible_aera.append(np.array([nx, na1, na2]))
                 else:
-                    obstacle_aera.append([nx, na1, na2])
+                    obstacle_aera.append(np.array([nx, na1, na2]))
+    
+    feasible_aera = np.array(feasible_aera)
+    obstacle_aera = np.array(obstacle_aera)
 
 
+@jit(target = "cuda")
 def findTargetArea():
     for config in feasible_aera:
         x = config[0] * dx
@@ -132,6 +139,7 @@ def checkReach():
         return False
 
 
+@jit(target = "cuda")
 def findPath():
     space2 = space
     iteration = 0
