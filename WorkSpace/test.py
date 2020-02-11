@@ -31,9 +31,9 @@ w = int(robot['armwidth'])
 space = np.zeros([x_size, a1_size, a2_size], dtype=float)
 space2 = space
 env = zer
-obstacle_aera = []
-feasible_aera = []
-target_aera = []
+obstacle_area = []
+feasible_area = []
+target_area = []
 
 @vectorize(["float32(float32, float32)"], target='cuda')
 def Presence(x, a1, a2):
@@ -110,17 +110,17 @@ def generateNeuronalSpace():
                 a1 = float(- np.pi + na1 * da1)
                 a2 = float(- np.pi + na2 * da2)
                 if Feasable(x, a1, a2):
-                    feasible_aera.append(np.array([nx, na1, na2]))
+                    feasible_area.append(np.array([nx, na1, na2]))
                 else:
-                    obstacle_aera.append(np.array([nx, na1, na2]))
+                    obstacle_area.append(np.array([nx, na1, na2]))
     
-    feasible_aera = np.array(feasible_aera)
-    obstacle_aera = np.array(obstacle_aera)
+    feasible_area = np.array(feasible_area)
+    obstacle_area = np.array(obstacle_area)
 
 
 @jit(target = "cuda")
 def findTargetArea():
-    for config in feasible_aera:
+    for config in feasible_area:
         x = config[0] * dx
         a1 = float(- np.pi + config[1] * da1)
         a2 = float(- np.pi + config[2] * da2)
@@ -128,7 +128,7 @@ def findTargetArea():
             continue
         else:
             if Presence(x, a1, a2)[target[0], target[1]] == 1:
-                target_aera.append(config)
+                target_area.append(config)
                 space[config[0], config[1], config[2]] = 1
 
 
@@ -145,7 +145,7 @@ def findPath():
     iteration = 0
     while not checkReach():
         iteration += 1
-        for config in feasible_aera:
+        for config in feasible_area:
             nx = config[0]
             na1 = config[1]
             na2 = config[2]
