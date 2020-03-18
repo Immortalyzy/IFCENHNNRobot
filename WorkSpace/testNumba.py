@@ -4,18 +4,20 @@ import time
 
 
 @jit(nopython=True)
-def go_fast(): # Function is compiled and runs in machine code
+def go_fast():  # Function is compiled and runs in machine code
+    a = np.ones((1000, 1000))
     trace = 0
+    trace += np.sum(a)
     for i in range(1000000):
         trace += np.tanh(i)
     return trace
 
-def go_fast_withoutNumba(): # Function is compiled and runs in machine code
+
+def go_fast_withoutNumba():  # Function is compiled and runs in machine code
     trace = 0
     for i in range(1000000):
         trace += np.tanh(i)
     return trace
-
 
 
 # WITHOUT NUMBA

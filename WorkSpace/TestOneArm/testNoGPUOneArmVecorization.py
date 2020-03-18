@@ -1,3 +1,4 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -15,7 +16,7 @@ one = np.ones((envx, envy), dtype=bool)
 
 # Declare neuraonal space size and generate corresponding coordinate space
 x_size = 192
-a1_size = 72
+a1_size = 1800
 basic_space = np.zeros((x_size, a1_size, 2), dtype=int)
 for nx in range(x_size):
     for na1 in range(a1_size):
@@ -154,12 +155,14 @@ def findPath(A):
         A_ss *= A_p
         A_s = np.tanh(A_ss)
         iteration += 1
+        """
         space_ = np.zeros([x_size, a1_size])
         for nx in range(x_size):
             for na1 in range(a1_size):
                 space_[nx, na1] = A_s[nx + 1][na1 + 1]
 
         drawNeuronalSpace(space_)
+        """
 
     print("Path found with " + str(iteration) + " iteration")
 
