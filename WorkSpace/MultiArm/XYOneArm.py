@@ -21,27 +21,13 @@ dimension = 3
 blocks = np.power(3, dimension)
 x_size = int(192 / 2)
 y_size = int(108 / 2)
-a1_size = 36
-Cd = np.zeros(dimension, dtype=np.int8)
-for i in range(dimension):
-    Cd[i] = comb(dimension, i+1)
-twon = np.power(2, np.asarray(range(dimension)))
-maxC = np.max(Cd)
+a1_size = 72
 
 # Define destination coordinates and initial coordinate
-target = np.array([155, 60], dtype=int)
+target = np.array([155, 20], dtype=int)
 nx0 = 0
 ny0 = int(y_size / 2)
 na10 = int(a1_size / 2)
-
-# spread orders
-Spo = np.zeros((dimension, maxC, dimension), dtype=np.int8)
-for i in range(dimension):
-    c_l = list(combinations(range(dimension), i + 1))
-    for j in range(Cd[i]):
-        for k in range(i+1):
-            Spo[i, j, k] = c_l[j][k]
-
 
 # Calculate step size and angle array
 dx = 1. * envx / x_size
@@ -66,7 +52,7 @@ def XToNx(x):
 
 @jit(nopython=True)
 def NaToA(na):
-    return -np.pi / 2 + na * da1
+    return -np.pi + na * da1
 
 
 @jit(nopython=True)
@@ -84,18 +70,18 @@ l = int(robot['armlength'])
 
 
 @jit(nopython=True)
-def Presence(x, y, a1):
+def Presence(x__, y__, a1):
     """ Calculate the presence of the robot at configuration config,
         return an matrix of the same size of environment"""
     pres = np.zeros((envx, envy), dtype=np.bool_)
-    x1 = x
-    y1 = y
+    x1 = x__
+    y1 = y__
     for x_ in range(l):
         for y_ in range(l):
             # check if in arm1
             x = int(x1 + x_ * (- 1 + 2 * int(np.abs(a1) <= np.pi/2)))
             y = int(y1 + y_ * (- 1 + 2 * int(a1 >= 0)))
-            if x >= 0 and y >= 0 and x < envx:
+            if x >= 0 and y >= 0:
                 d = np.sqrt((x - x1) ** 2 + (y-y1) ** 2)
                 if d < l:
                     A = np.tan(a1)
@@ -173,7 +159,7 @@ def findTargetArea(feasible_area, feasible_count, presences, space):
 
 
 @jit(nopython=True)
-def spread(A, dimension, spread_order, Cd):
+def spread(A, dimension):
     As = np.copy(A)
     for i in range(x_size):
         for j in range(y_size):
@@ -199,7 +185,7 @@ def findPath(A, ta, tc):
 
     iteration = 0
     while A_s[nx0+1, ny0+1, na10+1] < 0.0000000000000001:
-        A_ss = spread(A_s, dimension, Spo, Cd)
+        A_ss = spread(A_s, dimension)
         A_ss *= A_b
         A_ss *= A_p
         A_s = np.tanh(A_ss / blocks)
