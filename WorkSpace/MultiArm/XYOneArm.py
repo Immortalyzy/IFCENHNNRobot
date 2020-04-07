@@ -267,10 +267,12 @@ def animate(space, presences_):
     v_max = np.amax(space)
     while space[cu_po[0], cu_po[1], cu_po[2]] < v_max:
         sub_matrix = space[cu_po[0]-1:cu_po[0]+2,
-                           cu_po[1]-1:cu_po[1]+2, cu_po[2]-1:cu_po[2]+2]
+                           cu_po[1]-1:cu_po[1]+2,
+                           cu_po[2]-1:cu_po[2]+2]
         ne_po = np.where(sub_matrix >= np.amax(sub_matrix))
-        ne_po = [ne_po[0][0] + cu_po[0]-1, ne_po[1]
-                 [0] + cu_po[1] - 1, ne_po[2][0]+cu_po[2]-1]
+        ne_po = [ne_po[0][0] + cu_po[0] - 1,
+                 ne_po[1][0] + cu_po[1] - 1,
+                 ne_po[2][0] + cu_po[2] - 1]
         if cu_po == ne_po:
             break
         cu_po = ne_po
