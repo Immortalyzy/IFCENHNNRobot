@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/jeremie/Code/Library/anaconda3/bin/python"
+    "python.pythonPath": "C:\\Users\\JeremieYANG\\anaconda3\\python.exe",
+    "cmake.configureOnOpen": false
 }

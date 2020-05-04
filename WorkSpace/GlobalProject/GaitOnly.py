@@ -7,7 +7,7 @@ target = [[0], [0]]
 origin = [[99], [99]]
 x_size = 100
 y_size = 100
-Tv = np.asarray([1, 0.60, 0.5, 1])
+Tv = np.asarray([1, 0.60, 0.20, 1])
 
 
 def buildEnv():
@@ -16,7 +16,7 @@ def buildEnv():
         for j in range(50):
             x = i + 10
             y = j + 10
-            env[x, y] = 1
+            env[x, y] = 2
 
     for i in range(50):
         for j in range(10):
@@ -28,7 +28,7 @@ def buildEnv():
         for j in range(40):
             x = i + 30
             y = j + 20
-            env[x, y] = 1
+            env[x, y] = 3
 
     for i in range(30):
         for j in range(10):
@@ -70,8 +70,11 @@ def findPath(A, T):
     A_s = A_ * A_p
 
     iteration = 0
+    dA1 = 10
+    dA2 = 50 
     # while A_s[origin[0][0]+1, origin[1][0]+1] < 0.001:
-    while A_s[origin[0][0]+1, origin[1][0]+1] < 1e-15:
+    # while A_s[origin[0][0]+1, origin[1][0]+1] < 1e-14:
+    while np.abs(dA2 - dA1) > 1e-15:
         A_ss = np.copy(A_s)
         A_ss += T_[:, :, 0] * np.roll(A_s, 1, axis=0)
         A_ss += T_[:, :, 1] * np.roll(A_s, -1, axis=0)
@@ -83,7 +86,11 @@ def findPath(A, T):
         A_ss += T_[:, :, 7] * np.roll(np.roll(A_s, -1, axis=0), -1, axis=1)
         A_ss *= A_b
         A_ss *= A_p
-        A_s = np.tanh(A_ss/9)
+        A_ss = A_ss/9
+        dA1 = dA2
+        dA2 = np.sum(np.abs(A_ss - A_s))
+        A_s = np.copy(A_ss)
+#        A_s = 1 / (1 + np.exp(-A_ss))
         A_s[target[0][0] + 1, target[1][0] + 1] = 1.0
         iteration += 1
 #        """
@@ -172,6 +179,7 @@ def animate(env, space):
 
 
 env = buildEnv()
+draw(env, [99, 99])
 space, T = generateNeuronalSpace(env, target)
 res = findPath(space, T)
 animate(env, res)
