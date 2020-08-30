@@ -26,7 +26,7 @@ a2_size = 18
 max_step = 1e4
 
 # Define destination coordinates and initial coordinate
-target = np.array([90, 20], dtype=int)
+target = np.array([150, 20], dtype=int)
 nx0 = 0
 ny0 = int(y_size / 2)
 na10 = int(a1_size / 2)
@@ -220,8 +220,6 @@ def spread(A, dimension):
                         1] = np.sum(A[i:i+3, j:j+3, k:k+3, l:l+3])
 
     return As
-
-    # @jit(nopython=True)
 
 
 @jit(nopython=True)

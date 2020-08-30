@@ -1,0 +1,29 @@
+\contentsline {chapter}{Abstract}{3}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}Presentation of the environment of work}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Presentation of company}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Presentation of the reception service}{6}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Presentation of the activities carried out during the internship}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Presentation of objectives}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Presentation of the methods and procedures used}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Software}{10}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Model information}{10}{subsection.2.2.2}%
+\contentsline {paragraph}{Model geometry}{10}{paragraph*.4}%
+\contentsline {paragraph}{Material details}{11}{paragraph*.6}%
+\contentsline {subsection}{\numberline {2.2.3}Quantification of the burnup of control rods}{11}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Neuron network setup}{12}{subsection.2.2.4}%
+\contentsline {paragraph}{Prefix}{12}{paragraph*.8}%
+\contentsline {paragraph}{Data acquisition}{13}{paragraph*.9}%
+\contentsline {paragraph}{Neuron network details}{13}{paragraph*.11}%
+\contentsline {chapter}{\numberline {3}Presentation of results}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Influence of $B_{cr}$ and its origin}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Impact on the effective multiplication factor}{15}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Origin of $B_{cr}$}{15}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Quantification of the burnup of control rods}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Results of the Deep Neuron Network}{17}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Regress results}{17}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Discussion}{18}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Conclusion}{21}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Annex}{23}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Logbook}{23}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Amazement report}{24}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Reception service organization chart}{25}{section.5.3}%

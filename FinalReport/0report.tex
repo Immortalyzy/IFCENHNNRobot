@@ -1,0 +1,90 @@
+%% * Format settings ****************************************************************
+%% paper arrangement and main font size
+\documentclass[utf8,twoside, 12pt, titlepage, openright]{report}
+%% Paper size and margins
+\usepackage[a4paper,top=2cm, bottom=3cm, left=3cm, right=2cm]{geometry}
+%% Police
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+%% Title format
+\usepackage{titlesec}
+\titleformat{\chapter}[block]
+  {\normalfont\fontsize{16}{16}\bfseries\filcenter}{}{1em}{}
+\titleformat{\section}
+  {\normalfont\fontsize{14}{14}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{12}}{\thesubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont\fontsize{12}{12}}{}{1em}{}
+%% Inter-line
+\usepackage{setspace}
+\onehalfspacing
+
+%% Indent first paragraph
+\usepackage{indentfirst}
+
+%% for blank pages at end
+\newcommand{\blankpage}{
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+}
+
+%% Add Chinese support
+\usepackage{xeCJK}
+\usepackage{ifplatform}
+%% For macOS users, the fonts need additional configurations.
+\ifmacosx
+\setCJKmainfont[BoldFont=STHeiti,ItalicFont=STKaiti]{STSong}
+\setCJKsansfont[BoldFont=STHeiti]{STXihei}
+\setCJKmonofont{STFangsong}
+\fi
+
+% For logbook
+\usepackage{tabularx}
+
+
+%% * Format settings ****************************************************************
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{subcaption}
+%\usepackage{natbib}
+\usepackage{graphicx}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%\usepackage{lineno}
+%\bibliographystyle{model1-num-names}
+%\bibliography{sample.bib}
+
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+\title{Application of Hopfield neural network on the energy-saving robot path finding and robot arm control.}
+\author{Jérémie YANG Zhenyu 杨振宇 \\ Student number : 19214064}
+\maketitle
+\cleardoublepage
+\setcounter{page}{1}
+
+\tableofcontents
+\newpage
+\input{1abstract.tex}
+\input{2introduction.tex}
+\input{3hopfield.tex}
+\input{4algorithm.tex}
+\input{5optimization.tex}
+\input{6result.tex}
+
+
+\blankpage
+\blankpage
+
+\end{document}
