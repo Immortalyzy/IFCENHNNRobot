@@ -1,8 +1,8 @@
-PWD /Users/jeremie/Code/Robot/FinalReport
+PWD /Users/jeremie/Code/Robot/Robot/FinalReport
 INPUT /usr/local/texlive/2020/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-var/web2c/xetex/xelatex.fmt
-INPUT /Users/jeremie/Code/Robot/FinalReport/0report.tex
+INPUT /Users/jeremie/Code/Robot/Robot/FinalReport/0report.tex
 OUTPUT output/0report.log
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/report.cls

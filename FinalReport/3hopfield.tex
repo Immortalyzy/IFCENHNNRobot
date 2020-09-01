@@ -3,7 +3,17 @@
 
 \section{Principles}
 \label{sec:hopfield_Principles}
+Firstly, let us introduce the basic concepts of Hopfield neuronal space that are used in this project.
+Work space: The real space where the robot is working. The dimension of this space is usually two or three.
+Configuration space: A virtual finite space where every point is a configuration of the robot. Like the position or arm joint angle. The dimension of this space equals the freedom degree of the robot. (Note that the space can be continue or discrete, finite does not mean that there are countable number of points)
+Obstacles: In the work space and the configuration space, they are places that the robot cannot reach.
+Neuronal space: It is a discrete topologically ordered representation of the configuration space. Each point (which will be called “neuron”) represents a configuration of the robot and the robot can go from every point to its adjacent point directly. Thus a path in the neuronal space will represent a feasible path for the robot.
+Neuron: Points of the neuronal space, each neuron is given a value between 0 and 1. The value will update in the finding process and finally indicate a path.
 
 \section{Advantages and disadvantages}
 \label{sec:hopfield_advanddisadv}
+Comparing with deep learning and neural network that are in plain development at present,
+Hopfield neuronal space has a very distinctive specialty – it does not require learning.
+Due to this, the run time performance is usually not as good as other neural networks.
+
 

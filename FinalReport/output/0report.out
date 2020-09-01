@@ -6,12 +6,13 @@
 \BOOKMARK [0][-]{chapter.2}{Hopfield\040neutral\040space}{}% 6
 \BOOKMARK [1][-]{section.2.1}{Principles}{chapter.2}% 7
 \BOOKMARK [1][-]{section.2.2}{Advantages\040and\040disadvantages}{chapter.2}% 8
-\BOOKMARK [0][-]{chapter.3}{Algorithms\040to\040use\040for\040the\040two\040projects}{}% 9
+\BOOKMARK [0][-]{chapter.3}{Innovative\040algorithms\040to\040use\040for\040the\040two\040projects}{}% 9
 \BOOKMARK [1][-]{section.3.1}{Energy-saving\040path\040finding}{chapter.3}% 10
 \BOOKMARK [1][-]{section.3.2}{Multi-arm\040robot}{chapter.3}% 11
 \BOOKMARK [0][-]{chapter.4}{Optimizations\040of\040computer\040code}{}% 12
 \BOOKMARK [1][-]{section.4.1}{Vectorization}{chapter.4}% 13
 \BOOKMARK [1][-]{section.4.2}{Numba\040and\040code\040modifications}{chapter.4}% 14
-\BOOKMARK [0][-]{chapter.5}{Results\040and\040discussion}{}% 15
-\BOOKMARK [1][-]{section.5.1}{Energy-saving\040path\040finding}{chapter.5}% 16
-\BOOKMARK [1][-]{section.5.2}{Multi-arm\040robot}{chapter.5}% 17
+\BOOKMARK [1][-]{section.4.3}{Pre-calculation\040of\040robot's\040coordinates\040\(Project\0402\040only\)}{chapter.4}% 15
+\BOOKMARK [0][-]{chapter.5}{Results\040and\040discussion}{}% 16
+\BOOKMARK [1][-]{section.5.1}{Energy-saving\040path\040finding}{chapter.5}% 17
+\BOOKMARK [1][-]{section.5.2}{Multi-arm\040robot}{chapter.5}% 18

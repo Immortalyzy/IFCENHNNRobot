@@ -1,22 +1,38 @@
 \chapter{Optimizations of computer code}
 \label{cha:optimizaiton}
 
-\section{Pre-calculation of robot's coordinates}
-\label{sec:optimizaiton_Precalculation}
-
-Calculation of the robot's presence (spatial coordinates that the robot occupies) is rather resources expensive. 
-Since the robot's move in space could be regraded as translation, it could be pre-calculated. 
-Presences of the robot in different places could be obtained by simple addition of the presence of the robot of same arm configuration
-and the difference in the coordinates of their origin point. 
-
-
-For a neuronal space of size $ 192 \times 18 $,
-without pre-calculation, generation of neuronal space takes about : 44.5 s.
-With pre-calculation, generation of neuronal space takes about : 0.41 s, the preparation
-of coordinates takes about 0.14 s.
 
 \section{Vectorization}
 \label{sec:optimizaiton_vectorization}
 
 \section{Numba and code modifications}
 \label{sec:optimizaiton_numba}
+\subsection{Numba Library}
+\label{ssec:numba_numba}
+Numba is a Python compiler that transforms Python code to high performance machine code which supports NumPy arrays and functions and loops.
+It could also work with CUDA to use Nvidia GPU.
+
+\subsection{Implementation of $np.roll()$ in Numba}
+\label{ssec:numba_nproll}
+
+\section{Pre-calculation of robot's coordinates (Project 2 only)}
+\label{sec:optimizaiton_Precalculation}
+
+Calculation of the robot's presence (spatial coordinates that the robot occupies) is rather resources expensive.
+Since the robot's move in space could be regraded as translation, it could be pre-calculated.
+Presences of the robot in different places could be obtained by simple addition of the presence of the robot of same arm configuration
+and the difference in the coordinates of their origin point.
+Let $ \mathcal{R} $ denote the set of points that are occupied by the robot at origin point $(0, 0)$.
+Then the set of points occupied by the robot of same arm configurations at point $(x_0, y_0)$
+will be $\{(x + x_0, y + y_0)|(x,y)\in\mathcal{R}\}$.
+So at the beginning, we could directly calculate all the presences of the robot of all the arm configurations.
+Then no more robot presence calculation is required.
+
+For a neuronal space of size $ 192 \times 18 $,
+without pre-calculation, generation of neuronal space takes about : 44.5 s.
+With pre-calculation, generation of neuronal space takes about : 0.41 s, the preparation
+of coordinates takes about 0.14 s.
+An improvement of approximately $100\times$ can be expected from this method.
+Greater the space, more significant will be the improvement.
+Most importantly this method lowers the importance of the efficiency of the process of solving robot’s presence,
+which is in addition, not a simple subject.

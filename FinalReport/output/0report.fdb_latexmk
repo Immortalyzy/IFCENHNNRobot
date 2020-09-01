@@ -1,11 +1,11 @@
 # Fdb version 3
-["xdvipdfmx"] 1598754782 "output/0report.xdv" "output/0report.pdf" "output/0report" 1598754782
-  "output/0report.xdv" 1598754782 34532 e3434e53853354c70dbcbd845d2b814f "xelatex"
+["xdvipdfmx"] 1598855262 "output/0report.xdv" "output/0report.pdf" "output/0report" 1598855262
+  "output/0report.xdv" 1598855262 44868 2933488dacbc26f221660baacf5d00e3 "xelatex"
   (generated)
   "output/0report.pdf"
-["xelatex"] 1598754781 "/Users/jeremie/Code/Robot/FinalReport/0report.tex" "output/0report.xdv" "0report" 1598754782
-  "/Users/jeremie/Code/Robot/FinalReport/0report.tex" 1598754771 2417 f6d799292366cdd989582ce36aed5849 ""
-  "/dev/null" 1598754777 0 d41d8cd98f00b204e9800998ecf8427e ""
+["xelatex"] 1598855261 "/Users/jeremie/Code/Robot/Robot/FinalReport/0report.tex" "output/0report.xdv" "0report" 1598855262
+  "/Users/jeremie/Code/Robot/Robot/FinalReport/0report.tex" 1598754771 2417 f6d799292366cdd989582ce36aed5849 ""
+  "/dev/null" 1598855234 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1246382020 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -130,15 +130,15 @@
   "1abstract.tex" 1598753964 639 c716be9e20ad19d4675ee77b30224574 ""
   "2introduction.tex" 1598754074 198 7956679974862ebc059128db068a86af ""
   "3hopfield.tex" 1598754375 183 17ac885cc928fac18a0d41408443dc27 ""
-  "4algorithm.tex" 1598754487 197 358bd64ca65a9ae3a350deb19cda9e16 ""
-  "5optimization.tex" 1598754617 200 35ff970a2765e4da2c9cd6b0e4aa21ca ""
+  "4algorithm.tex" 1598754828 208 c35b5a07d50fc82ad137c781d23f5ffc ""
+  "5optimization.tex" 1598855257 1212 0f7ab097f39dcfe27b25af8413882182 ""
   "6result.tex" 1598754723 172 4931a57f74e7d7e3c1605d8c943cec43 ""
-  "output/0report.aux" 1598754782 4437 bf563f8363c995ee3c850f2d9b0b6f8a "xelatex"
-  "output/0report.out" 1598754782 1162 5fa54c588bb4bc3d75e2597ebbafb95b "xelatex"
-  "output/0report.toc" 1598754782 1338 9722037935cfd979097b0bbaff411959 "xelatex"
+  "output/0report.aux" 1598855262 4742 d38fc9d0ebb5810cee8e3029d113e503 "xelatex"
+  "output/0report.out" 1598855262 1298 8473de68a9ae96a02e064a7521b43198 "xelatex"
+  "output/0report.toc" 1598855262 1465 ef9c4ab5d3dc6975906a9307ee731af9 "xelatex"
   (generated)
-  "output/0report.log"
   "output/0report.toc"
+  "output/0report.log"
+  "output/0report.aux"
   "output/0report.out"
   "output/0report.xdv"
-  "output/0report.aux"
