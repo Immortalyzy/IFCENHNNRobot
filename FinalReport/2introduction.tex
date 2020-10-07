@@ -5,6 +5,15 @@
 
 \section{Choice of technique}
 \label{sec:choice}
+Traditional intelligent path finding algorithm using deep learning is an extremely hot topic and very well studied.
+In addition, they usually require a complete set of robot researching tools including a real robot which we do not possess.
+So we didn't choose to work with deep neural network but the Hopfield neuronal network.
+The principles and theory of Hopfield network are introduced in chapter \ref{cha:hopfield}.
+It is simple to setup and we've anticipated its potential additional functionalities.
+One is to use Hopfield's \textit{diffusion factor} to take account of energy or time consumption.
+The other is to couple robot arm movement and space translation to globally control wheeled robots with arms.
+The two possible potential functionalities will be introduced in following two projects.
+
 
 \section{Projects to implement}
 \label{sec:projects}
@@ -12,5 +21,24 @@
 \subsection{Project 1 - 2D path finding problem}
 \label{ssec:project1}
 
-Project 1 consists of using Hopfield neuronal space to find an optimum path from an origin to a destination
+Project 1 consists of using Hopfield neuronal space to find an optimum path from an origin to a destination on a 2D map
 on considering energy and time consumption.
+Obstacles will be divided into 3 groups according the difficulty to pass them (in the sense of energy and time consumption).
+There are obstacles easy to pass, difficult to pass and impossible to pass.
+The robot will try to detour the obstacles but if the detour is slightly long, it will choose to pass the easy obstacles.
+If the detour is too long, it will choose to pass the difficult obstacles.
+Detailed description of the algorithm and results could be found at section \ref{sec:algorithm_project1} and
+\ref{sec:result_project1}.
+
+
+\subsection{Project 2 - Multi-arm target reaching problem}
+\label{ssec:project2}
+
+Project 2 consists of using Hopfield neuronal space to find an optimum configuration sequence for a robot
+with two-joint arm and XY dimension translation to reach a target in a 2D space.
+There will be obstacles that the robot should not touch and every point of the robot could reach the target
+(This is configurable).
+The robot could move freely on the plane and rotate its arms to which ever angle.
+This could help controlling robots that move with wheels and have arms to perform certain tasks.
+Detailed description of the algorithm and results could be found at section \ref{sec:algorithm_project2} and
+\ref{sec:result_project2}.

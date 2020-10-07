@@ -34,3 +34,35 @@ But it is possible to simulate its capacity.
 
 \section{Project 2: Multi-arm robot}
 \label{sec:algorithm_project2}
+\section{Multi-arm robot}
+\label{sec:algorithm_project2}
+In this project, comparing to the first one, some additional steps must be taken.
+One is to calculate the robot’s “presence” which means the space occupied in the work space by the robot’s arms in each configuration.
+It is necessary for calculating the neuronal space.
+Obstacles includes, in addition to all points of the obstacles in XY dimension,
+all configurations that the robot’s presence has overlapped space with any obstacles.
+
+These calculations consume lots of computational resources.
+So various approaches that can reduce this consumption by thousands of times are proposed in the following chapters.
+
+\subsection{Robot presence calculation}
+\label{ssec:algorithm_presence}
+The robot arms’ special presence is calculated using two methods.
+One is to consider the distance between any point to the arm’s joint and to the arm’s central axis.
+The other is to use the equation of robots outer lines.
+
+It is tested that the first one is faster and the result of second one is better.
+As we use a pre-calculation approach (introduced in section \ref{sec:optimizaiton_Precalculation}) to reduce the calculation time
+in this step there is no need to consider the computational resources consumed in this part.
+So we choose the second method.
+
+Based on the joint coordinates, joint angles and arm size, the equations of the robot's arm's outer lines can be obtained.
+
+\subsection{Preparation of neuronal space}
+\label{ssec:algorithm_project2_space}
+This preparation consists of calculating all the feasible configurations of the robot using the presences calculated.
+All neurons of configuration that has overlap with any obstacles are fixed to 0.
+
+This takes fairly amount of time.
+So many computational approaches that accelerates the calculation are applied.
+The most powerful ones are the usage of Numba and the vectorization. (see chapter \ref{cha:optimizaiton})
