@@ -1,8 +1,36 @@
 \chapter{Innovative algorithms to use for the two projects}
 \label{cha:algorithm}
 
-\section{Energy-saving path finding}
+\section{Project 1: 2D path finding}
 \label{sec:algorithm_project1}
 
-\section{Multi-arm robot}
+\subsection{Finding process}
+Before the finding process could begin, the neuronal space should be generated. 
+All obstacles points are set to 0 and will not be updated. 
+All target points are set to 1 and will not be updated. 
+Other points which represent feasible configurations will be set to 0 initially and updated in the finding process. 
+The finding process is in fact the process of updating values of neurons step by step. 
+Assuming N neurons exist in the neuronal space. 
+Their value could be changed due to inputs from adjacent neurons and sensory input (like obstacles that appear suddenly, but this is not considered in this project). 
+That is to say
+\[ \sigma_i(t+1)=g(\sum_{j}^{N}{T_{ij}\sigma_j}) \]
+Where g is a sigmoid function, T is a symmetric matrix storing the diffusion factors (discussed in detail in next chapter). 
+The detailed study of g will not be presented in this report, we choose \(g(x)=\tanh(\frac{x}{3^n}) \)where n is the dimension of neuronal space. 
+(\(3^n\) is the number of neurons that got summed).
+Step by step, the value of all neurons are updated (except for obstacles and destination), when the origin neuron (the neuron which represents the origin point of the robot) has a value greater than zero (in Python we could chose 1e-15 as zero), the path is found. From the origin neuron we go, step by step, to the next adjacent neuron whose value is the biggest among all adjacent neurons. This will give a set of neurons from the origin neuron to the destination neuron which represent a feasible path. It is what we want from this method. 
+
+\subsection{Modification of diffusion factor for energy saving}
+The symmetric matrix T mentioned above is what we called diffusion factor here. 
+It controls the influence of one neuron to another. 
+Thus the difficulty of going from one neuron to another. 
+Which could be interpreted as the time or energy consumption in our case. 
+Since T is symmetric, the difficulty level of going form neuron 1 to neuron 2 equals that of going from neuron 2 to neuron 1. 
+This is not always correct like climbing and descending. 
+But this problem is not yet considered in this project. 
+
+Due to lack of real robots and environments, we could not simulate diffusion factors with real interpretations. 
+But it is possible to simulate its capacity. 
+
+
+\section{Project 2: Multi-arm robot}
 \label{sec:algorithm_project2}

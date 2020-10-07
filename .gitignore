@@ -140,3 +140,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+FinalReport/__latexindent_temp.tex
+./Build
