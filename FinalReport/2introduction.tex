@@ -4,9 +4,23 @@
 \label{sec:review}
 
 General intelligent robot controlling systems for legged robots contain path planning and gait planning parts. 
-The path planning parts are similar with wheeled robots 
+
+The path planning parts are similar with wheeled robots that could avoid obstacles and choose the optimum path from one place to another.
+This part has been excessively studied, with various tools. 
+The navigation algorithms of robots are divided into three categories\cite{RN9} :
+deterministic algorithms, nondeterministic algorithms and evolutionary algorithms (usually a combination of two previous algorithms). 
+
+The gait planning parts are only for legged robots. 
+Human does the gait planning all the time without knowing it because our brain has learning to plan gaits in different conditions when we were infants. 
+It all became automatic after the body has remembered it. 
+However, it's not so easy to make robots do the same thing.
 
 % Gap scope -- meaning of the work, the small circle in which we perform our work, important but not studied.
+Hopfield neural network is not traditionally used for path finding or gait finding problems, but it turns out to be able to handle both. 
+Such a model was proposed in 1995 \cite{RN11} that is very similar to a Hopfield neural network. 
+It has topologically organized with nonlinear analog neurons. 
+Its functions are not fully exploited, including the possibility of including energy consumption in path finding and gait planning while the robot could move with wheels. 
+In addition, it could be applied in changing environment, the neuronal space can be updated while running.
 % Add Methods, 
 \section{Methods}
 \label{sec:method}

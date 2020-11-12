@@ -3,17 +3,50 @@
 
 \section{Principles}
 \label{sec:hopfield_Principles}
-Firstly, let us introduce the basic concepts of Hopfield neuronal space that are used in this project.
-Work space: The real space where the robot is working. The dimension of this space is usually two or three.
-Configuration space: A virtual finite space where every point is a configuration of the robot. Like the position or arm joint angle. The dimension of this space equals the freedom degree of the robot. (Note that the space can be continue or discrete, finite does not mean that there are countable number of points)
-Obstacles: In the work space and the configuration space, they are places that the robot cannot reach.
-Neuronal space: It is a discrete topologically ordered representation of the configuration space. Each point (which will be called “neuron”) represents a configuration of the robot and the robot can go from every point to its adjacent point directly. Thus a path in the neuronal space will represent a feasible path for the robot.
-Neuron: Points of the neuronal space, each neuron is given a value between 0 and 1. The value will update in the finding process and finally indicate a path.
+Firstly, let us introduce the basic concepts that are used in this project. We'll not completely cover the Hopfield neutral network as it is not our focus. 
+The detailed description of Hopfield neutral network could be found in its origin article\cite{HOPFIELD}.
+\begin{itemize}
+    \item Work space: The real space where the robot is working. The dimension of this space is usually two or three.
+    \item Configuration space: A virtual finite space where every point is a configuration of the robot. Like the position or arm joint angle. The dimension of this space equals the freedom degree of the robot. (Note that the space can be continue or discrete, finite does not mean that there are countable number of points)
+    \item Obstacles: In the work space and the configuration space, they are places that the robot cannot reach.
+    \item Neuronal space: It is a discrete topologically ordered representation of the configuration space. Each point (which will be called “neuron”) represents a configuration of the robot and the robot can go from every point to its adjacent point directly. Thus a path in the neuronal space will represent a feasible path for the robot.
+    \item Neuron: Points of the neuronal space, each neuron is given a value between 0 and 1. The value will update in the finding process and finally indicate a path.
+\end{itemize}
+
+The main idea is to generate a neuronal space based on the configuration space and the obstacles and to update this space until we find a feasible path from the origin configuration to the final configuration.
+The generation of the neutral space depends on the project. For different kinds of robots and different kinds of problems (path finding or gait planning). It will be described in the chapter \ref{cha:algorithm}.
+Nevertheless, once the neutral space is generated, the finding of the solution is the same -- 
+constantly updating the neutral space until a feasible path from initial configuration $q_{init}$ to target configuration $q_{targ}$ is found.
+In our project, we'll not consider outside input for instance. All the neurons are updated only according to the values of adjacent neurons.
+Let $\sigma_i$ denote the values of neurons where $i$ is the index of the neuron (no matter the dimension of the neuronal space).
+$T_{ij}$ is the \textit{diffusion factor}, defined to determine the formula of neuron update, as follows. 
+
+\[ \sigma_i(t+1)=g(\sum_{j}^{N}{T_{ij}\sigma_j}) \]
+
+where $ g $ is a sigmoid function. 
+It has been proved that \cite{RN11}, as long as $T$ is excitatory and symmetric and the steepest slope $\beta $ of $g$ and the most negative eigenvalue $\lambda_{min}$of the matrix $T$ satisfy $ \beta < |1/\lambda_{min}|$,
+the finding process will converge to the optimum result (if there is one).
+
+However, if the neutral space is very large, this process will take considerable time. Optimization will be needed and all optimizations done will be introduced in chapter \ref{cha:optimizaiton}.
+
+
 
 \section{Advantages and disadvantages}
 \label{sec:hopfield_advanddisadv}
 Comparing with deep learning and neural network that are in plain development at present,
-Hopfield neuronal space has a very distinctive specialty – it does not require learning.
-Due to this, the run time performance is usually not as good as other neural networks.
+Hopfield neutral space has a very distinctive specialty – it does not require learning.
+All the training problems do not exist with Hopfield neutral space such as overfitting etc.
+Apart from this, unlike DNN, HNN is not completely opaque. 
+We could partially deduce the reason of the choice made by the network.
+At last, real time modifications of the network could be done, it makes the network able to take account of outside change more easily.
+
+However, the run time performance is usually not as good as other neural networks since no training is needed.
+The construction of the network is also more complex. The input type of values are also more restricted than DNN. 
+Generally, HNN could not deal with as many types of problems as DNN.
+
+About the convergence problem, its convergence (as long as its convergence speed) demands on special configuration in the matrix $ T_{ij} $ and function $g$. 
+Nevertheless, unlike DNN, the result usually does not depend on the configurations. 
+We could not conclude on which one's convergence performance is better as there is no comparison research done. 
+
 
 
